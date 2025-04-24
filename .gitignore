@@ -1,0 +1,30 @@
+# Virtual Environment
+venv/
+
+# Environment Config
+.env
+.env.*
+
+# Python Cache and Build
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+
+# IDE Specific
+.vscode/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Data / DB (optional - keep if seed_data grows into raw data or .db)
+*.sqlite3
+*.db
+*.bak
+*.tmp
+
+# Notebook Checkpoints (if any in future)
+.ipynb_checkpoints/

@@ -1,0 +1,11 @@
+# ETL Errors Log
+# This log file is used to record data quality issues detected during the ETL process.
+# These issues may include missing values, invalid formats, duplicates, etc.
+# The ETL script should append error details to this file during runtime.
+
+# Example format:
+# [CUSTOMER ERROR] Missing email address: Ali Yılmaz
+# [PRODUCT ERROR] Negative stock value: ProductID 102
+# [ORDER ERROR] Invalid payment type: Invoice
+
+# (Currently no known issues.)
