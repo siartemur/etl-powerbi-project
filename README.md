@@ -1,81 +1,72 @@
-# 📦 Create Data Warehouse Projesi
+# 📦 Create Data Warehouse Project
 
-Bu proje, ETL (Extract-Transform-Load) süreci ile bir satış verisini MSSQL veritabanına aktaran, veri ambarı (data warehouse) mimarisiyle modellenmiş ve Power BI ile görselleştirilmiş uçtan uca bir veri mühendisliği çalışmasıdır.
-
----
-
-## 🛠️ Kullanılan Teknolojiler
-
-- **Python (pandas, pyodbc, dotenv)** – ETL işlemleri
-- **MSSQL** – Veri ambarı platformu
-- **Kimball Modeli** – Veri modeli (dimensional modeling)
-- **Power BI** – Veri görselleştirme
-- **VS Code** – Geliştirme ortamı
+This project is an end-to-end data engineering solution that extracts sales data through an ETL (Extract-Transform-Load) process, loads it into an MSSQL data warehouse modeled using a dimensional (Kimball) architecture, and visualizes it with Power BI.
 
 ---
 
-## 🧱 Mimari Yapı
+## 🛠️ Technologies Used
 
-```bash
-create-datawarehouse/
-├── seed_data/                 # Gerçekçi CSV veri setleri
-│   ├── customers.csv
-│   ├── products.csv
-│   └── orders.csv
-├── etl_pipeline.py           # MSSQL bağlantısı, veri yükleme ve hata loglama
-├── schema.sql                # Veri ambarı şeması (Dim ve Fact tablolar)
-├── procedures.py             # Stored procedure simülasyonları
-├── analysis_queries.sql      # OLAP sorguları (slicer, filter, trend)
-├── test_pipeline.py          # ETL testi ve veri doğrulama
-├── etl_errors.log            # Veri kalitesi hataları loglanır
-├── .env                      # MSSQL bağlantı bilgileri
-├── requirements.txt          # Python bağımlılıkları
-└── README.md
+- **Python** (`pandas`, `pyodbc`, `dotenv`) – ETL operations  
+- **MSSQL** – Data warehouse platform  
+- **Kimball Model** – Dimensional data modeling  
+- **Power BI** – Data visualization  
+- **VS Code** – Development environment
 
-🧮 Veri Ambarı Modeli (Kimball)
+---
 
-Fact Table | Dim Tables
-FactOrder | DimCustomer, DimProduct, DimCategory, DimDate
+## 🧱 Project Structure
 
-⚙️ ETL Süreci
-.env üzerinden MSSQL bağlantısı alınır
-
-Python etl_pipeline.py çalıştırılır
-
-CSV verileri:
-
-DimCustomer
-
-DimCategory & DimProduct
-
-FactOrder
-
-Veri kalitesi hataları etl_errors.log dosyasına yazılır
-
-Testler test_pipeline.py ile yapılır
+- `create-datawarehouse/`
+- `├── seed_data/` – Realistic CSV datasets  
+- `│   ├── customers.csv`  
+- `│   ├── products.csv`  
+- `│   └── orders.csv`  
+- `├── etl_pipeline.py` – Handles MSSQL connection, data load, and error logging  
+- `├── schema.sql` – Data warehouse schema (Dim and Fact tables)  
+- `├── procedures.py` – Simulated stored procedures  
+- `├── analysis_queries.sql` – OLAP-style queries (slicer, filter, trend)  
+- `├── test_pipeline.py` – ETL test and data validation  
+- `├── etl_errors.log` – Logs data quality issues  
+- `├── .env` – MSSQL connection credentials  
+- `├── requirements.txt` – Python dependencies  
+- `└── README.md`
 
 
-📊 Power BI Dashboard – Satış Analizi
-Aşağıdaki dashboard, ETL sonrası oluşan veri ambarı modelinin Power BI ile görselleştirilmiş halidir.
+---
 
-📸 Dashboard Görünümü:
-<!-- Ekran görüntüsünü buraya koy -->
+## 🧮 Data Warehouse Model (Kimball Approach)
 
-📈 İçerdiği Görseller:
-Bar Chart → En çok sipariş veren müşteriler
+| Fact Table | Dimension Tables |
+|------------|------------------|
+| FactOrder  | DimCustomer, DimProduct, DimCategory, DimDate |
 
-Pie Chart → Şehirlere göre sipariş yüzdesi
+---
 
-Line Chart → Aylık sipariş trendi
+## ⚙️ ETL Workflow
 
-Stacked Column Chart → Kategori bazlı ürün satışları
+- MSSQL connection is established using credentials from `.env`
+- Run `etl_pipeline.py` with Python
+- CSV datasets are loaded into:
+  - **DimCustomer**
+  - **DimCategory & DimProduct**
+  - **FactOrder**
+- Data quality issues are logged into `etl_errors.log`
+- ETL tests and validation are run using `test_pipeline.py`
+
+---
+
+## 📊 Power BI Dashboard – Sales Analysis
+
+The dashboard below visualizes the post-ETL data warehouse model using Power BI.
+
+### 📸 Dashboard Preview
+
+![Dashboard Preview](images/dashboard_preview.png)
 
 
+### 📈 Visuals Included:
+- **Bar Chart** → Top ordering customers  
+- **Pie Chart** → Order distribution by city  
+- **Line Chart** → Monthly order trend  
+- **Stacked Column Chart** → Sales by product category
 
- Test Raporu (ETL Kalite Kontrol)
-
- > python test_pipeline.py
-
-✅ [TEST 1] MSSQL bağlantısı başarılı.
-✅ [TEST 2] DimCustomer tablosunda 20+ satır veri var.
-✅ [TEST 3] etl_errors.log boş (veri kalitesi sorunu bulunamadı).
